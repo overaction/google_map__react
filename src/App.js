@@ -1,11 +1,15 @@
 import React from 'react';
+import MapComponent from './components/mapComponent';
 
-function App() {
+const App = () => {
   return (
-    <div className="App">
-      hi
-    </div>
-  );
+    <>
+    <h1>
+      Maps
+    </h1>
+    <MapComponent />
+    </>
+  )
 }
 
 export default App;
