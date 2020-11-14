@@ -3,7 +3,6 @@ import { GoogleMap, InfoWindow, Marker, useLoadScript } from '@react-google-maps
 import vector from '../imgs/rabbit.svg';
 import {formatRelative} from 'date-fns';
 
-const libraries = ['places'];
 const mapContainerStyle = {
   width: '100vw',
   height: '100vh',
@@ -101,12 +100,7 @@ const iconMarker = {
   url: vector,
 };
 
-const MapComponent = () => {
-  const { isLoaded, loadError } = useLoadScript({
-    googleMapsApiKey: process.env.REACT_APP_GOOGLE_MAP_API_KEY,
-    libraries,
-  });
-
+const MapComponent = ({mapRef,onMapLoad}) => {
   const [markers, setMarkers] = useState([]);
   const [selected, setSelected] = useState(null);
 
@@ -121,15 +115,8 @@ const MapComponent = () => {
     ]);
   }, []);
 
-  const mapRef = useRef();
-  const onMapLoad = useCallback((map) => {
-    mapRef.current = map;
-  },[])
+ 
 
-  if (loadError) {
-    return <div>Map cannot be loaded right now, sorry.</div>;
-  }
-  if (!isLoaded) return 'Loading Maps';
   return (
     <div>
       <GoogleMap

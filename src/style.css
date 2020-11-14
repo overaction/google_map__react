@@ -1,10 +1,25 @@
 body {
   margin: 0;
 }
+
 h1 {
   position: absolute;
   top: 1rem;
   margin: 0;
   padding: 1rem;
   z-index: 999;
+}
+
+.search {
+  z-index: 999;
+  padding: 1rem;
+  position: absolute;
+  font-size: 2rem;
+  left: 30%;
+  
+}
+
+.searchInput {
+  padding: 0.5rem 3rem;
+  font-size: 1rem;
 }
