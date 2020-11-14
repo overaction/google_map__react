@@ -1,5 +1,6 @@
-import React, { useState } from 'react';
+import React, { useCallback, useState } from 'react';
 import { GoogleMap, Marker, useLoadScript } from '@react-google-maps/api';
+import vector from '../imgs/rabbit.svg';
 
 const libraries = ['places'];
 const mapContainerStyle = {
@@ -95,6 +96,12 @@ const options = {
   zoomControl: true,
 };
 
+const iconMarker = {
+  url: vector,
+  scaledSize: new window.google.maps.Size(40, 40),
+  anchor: new window.google.maps.Point(15, 15),
+};
+
 const MapComponent = () => {
   const { isLoaded, loadError } = useLoadScript({
     googleMapsApiKey: process.env.REACT_APP_GOOGLE_MAP_API_KEY,
@@ -102,6 +109,17 @@ const MapComponent = () => {
   });
 
   const [markers, setMarkers] = useState([]);
+
+  const onMapClick = useCallback((e) => {
+    setMarkers((current) => [
+      ...current,
+      {
+        lat: e.latLng.lat(),
+        lng: e.latLng.lng(),
+        time: new Date(),
+      },
+    ]);
+  }, []);
 
   if (loadError) {
     return <div>Map cannot be loaded right now, sorry.</div>;
@@ -114,24 +132,17 @@ const MapComponent = () => {
         zoom={12}
         options={options}
         center={center}
-        onClick={(e) => {
-          setMarkers((current) => [
-            ...current,
-            {
-              lat: e.latLng.lat(),
-              lng: e.latLng.lng(),
-              time: new Date(),
-            },
-          ]);
-        }}
+        onClick={onMapClick}
       >
-        {markers.map((marker) => (
-          <Marker
-            key={marker.time.toISOString()}
-            position={{lat: marker.lat, lng: marker.lng}}
-            
-            />
-        ))}
+        {markers
+          ? markers.map((marker) => (
+              <Marker
+                key={marker.time.toISOString()}
+                position={{ lat: marker.lat, lng: marker.lng }}
+                icon={iconMarker}
+              />
+            ))
+          : null}
       </GoogleMap>
     </div>
   );
