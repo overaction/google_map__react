@@ -12,14 +12,29 @@ h1 {
 
 .search {
   z-index: 999;
-  padding: 1rem;
+  width: 100%;
   position: absolute;
   font-size: 2rem;
-  left: 30%;
-  
+  top: 20px;
+  max-width: 400px;
+  transform: translateX(-40%);
+  left: 50%;
 }
 
-.searchInput {
+.search input {
+  width: 100%;
   padding: 0.5rem 3rem;
   font-size: 1rem;
+}
+
+.myLocate {
+  position: absolute;
+  top: 35px;
+  right: 2.5rem;
+  z-index: 999;
+  color: rgb(31, 160, 235);
+  background-color: transparent;
+  border: none;
+  outline: none;
+  cursor: pointer;
 }

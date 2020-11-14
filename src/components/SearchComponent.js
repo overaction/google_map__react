@@ -54,10 +54,12 @@ const SearchComponent = ({panTo}) => {
           
         />
         <ComboboxPopover>
+          <ComboboxList>
           {status === 'OK' &&
             data.map(({ place_id, description }) => (
               <ComboboxOption key={place_id} value={description} />
             ))}
+            </ComboboxList>
         </ComboboxPopover>
       </Combobox>
     </div>

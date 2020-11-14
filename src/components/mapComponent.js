@@ -1,5 +1,5 @@
-import React, { useCallback, useRef, useState } from 'react';
-import { GoogleMap, InfoWindow, Marker, useLoadScript } from '@react-google-maps/api';
+import React, { useCallback, useState } from 'react';
+import { GoogleMap, InfoWindow, Marker } from '@react-google-maps/api';
 import vector from '../imgs/rabbit.svg';
 import {formatRelative} from 'date-fns';
 
@@ -114,8 +114,6 @@ const MapComponent = ({mapRef,onMapLoad}) => {
       },
     ]);
   }, []);
-
- 
 
   return (
     <div>

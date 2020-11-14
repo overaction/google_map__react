@@ -1,6 +1,7 @@
 import { useLoadScript } from '@react-google-maps/api';
 import React, { useCallback, useRef } from 'react';
-import MapComponent, {panTo} from './components/mapComponent';
+import MapComponent, { panTo } from './components/mapComponent';
+import MyLocation from './components/MyLocation';
 import SearchComponent from './components/SearchComponent';
 
 const libraries = ['places'];
@@ -14,25 +15,27 @@ const App = () => {
   const mapRef = useRef();
   const onMapLoad = useCallback((map) => {
     mapRef.current = map;
-  },[]);
-  // 
-  const panTo = useCallback(({lat,lng}) => {
-    mapRef.current.panTo({lat,lng});
-    mapRef.current.setZoom(14);
+  }, []);
+  //
+  const panTo = useCallback(({ lat, lng }) => {
+    mapRef.current.panTo({ lat, lng });
+    mapRef.current.setZoom(13);
   }, []);
 
   return (
     <>
-    <h1>
-      Rabbit Map
-    </h1>
-      {isLoaded ? ( <>
-      <SearchComponent panTo={panTo}/>
-      <MapComponent mapRef={mapRef} onMapLoad={onMapLoad}/>
-      </>
-      ) : <div>Now Loading...</div>}
+      <h1>Rabbit Map</h1>
+      {isLoaded ? (
+        <>
+          <SearchComponent panTo={panTo} />
+          <MapComponent mapRef={mapRef} onMapLoad={onMapLoad} />
+          <MyLocation panTo={panTo} />
+        </>
+      ) : (
+        <div>Now Loading...</div>
+      )}
     </>
-  )
-}
+  );
+};
 
 export default App;
